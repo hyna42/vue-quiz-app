@@ -6,12 +6,8 @@ import Quiz from "./components/Quiz.vue";
 const { error, loading, questions, fetchQuestions } = useFetchQuestions();
 
 onMounted(async () => {
-  const url = "https://opentdb.com/api.php?amount=10";
+  const url = "https://opentdb.com/api.php?amount=3";
   await fetchQuestions(url);
-
-  console.log("error", error.value);
-  console.log("loading", loading.value);
-  console.log("questions", questions.value);
 });
 </script>
 
