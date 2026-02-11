@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-type TriviaQuestion = {
+export type TriviaQuestion = {
     type: "multiple" | "boolean";
     difficulty: "easy" | "medium" | "hard";
     category: string;
