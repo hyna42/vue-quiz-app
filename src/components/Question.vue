@@ -23,12 +23,12 @@ const handleAnswer = () => {
     selectedAnswer.value === props.question.correct_answer;
 };
 //reinitialize refs when new question
-watch(
-  () => props.question,
-  () => {
-    ((selectedAnswer.value = null), (isCorrectAnswer.value = null));
-  },
-);
+// watch(
+//   () => props.question,
+//   () => {
+//     ((selectedAnswer.value = null), (isCorrectAnswer.value = null));
+//   },
+// );
 //informe parent when responding, need change step
 const emits = defineEmits(["answer"]);
 </script>

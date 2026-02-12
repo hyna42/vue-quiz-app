@@ -3,6 +3,7 @@ import type { TriviaQuestion } from "@/composables/Api";
 import Progress from "./Progress.vue";
 import { computed, ref } from "vue";
 import Question from "./Question.vue";
+import Recap from "./Recap.vue";
 
 //props
 const props = defineProps<{
@@ -40,7 +41,7 @@ const addAnswer = (answer: string) => {
     <!-- title -->
     <h1>General Knowledge Quiz</h1>
     <div v-if="end">
-      <p>Evaluation ...</p>
+      <Recap/>
     </div>
     <div v-else>
       <!-- progress bar -->
@@ -50,6 +51,7 @@ const addAnswer = (answer: string) => {
         v-if="currentQuestion"
         :question="currentQuestion"
         @answer="addAnswer"
+        :key="step"
       />
     </div>
     <hr />
