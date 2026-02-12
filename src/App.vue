@@ -20,7 +20,7 @@ onMounted(async () => {
       <div v-if="loading" class="quiz-message" :aria-busy="true">
         <p>Chargement des questions ...</p>
       </div>
-      <Quiz v-else :questions="questions" />
+      <Quiz v-else :questions="questions" v-if="questions"/>
     </div>
   </main>
 </template>
