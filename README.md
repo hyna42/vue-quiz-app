@@ -1,42 +1,193 @@
-# vue-quiz-app
+# 🧠 Vue Quiz App
 
-This template should help get you started developing with Vue 3 in Vite.
+A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and **Vite**. This project demonstrates core Vue.js concepts through a fully functional quiz experience.
 
-## Recommended IDE Setup
+![alt text](./src/assets/img1.png)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+![alt text](./src/assets/img2.png)
 
-## Recommended Browser Setup
+![alt text](./src/assets/img3.png)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+![alt text](./src/assets/img4.png)
 
-## Type Support for `.vue` Imports in TS
+![alt text](./src/assets/img5.png)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+## ✨ Features
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Quiz Functionality
 
-## Project Setup
+- 📝 **Dynamic Question Loading** - Fetches questions from Open Trivia Database API
+- 🎯 **Multiple Choice & True/False** - Supports both question types
+- 🎨 **Interactive Answers** - Radio buttons with visual feedback (correct/wrong answers highlighted)
+- 📊 **Progress Tracking** - Real-time progress bar showing completion percentage
+- 🏁 **Results Summary** - Detailed recap with score, percentage, and custom motivational messages
 
-```sh
+### Vue 3 Learning Features
+
+- ✅ **Composition API** - Using `<script setup>` syntax
+- 🔄 **Reactive State Management** - `ref()` and `computed()` for component state
+- 👀 **Watchers** - Auto-reset state when switching questions
+- 🔗 **Custom Events** - Parent-child communication with emit
+- 🎭 **Conditional Rendering** - `v-if`, `v-else` for dynamic UI
+- 🔁 **List Rendering** - `v-for` for displaying answer options
+- 🏗️ **Component Composition** - Modular, reusable components
+
+---
+
+## 🎓 Learning Objectives Achieved
+
+This project teaches essential Vue.js concepts:
+
+| Concept                 | Implementation                                           |
+| ----------------------- | -------------------------------------------------------- |
+| **State Management**    | Tracking quiz progress, answers, and results with `ref`  |
+| **Computed Properties** | Calculating score percentage dynamically                 |
+| **Watchers**            | Re-initializing component state when questions change    |
+| **Event Handling**      | Custom events (`@answer`, `@restart`)                    |
+| **API Integration**     | Fetching questions from external API with error handling |
+| **Type Safety**         | Full TypeScript support for type-safe components         |
+| **Component Structure** | Parent-child relationships and data flow                 |
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── Quiz.vue          # Main quiz container, state management
+│   ├── Question.vue      # Single question with answer options
+│   ├── Progress.vue      # Progress bar component
+│   └── Recap.vue         # Results screen with score display
+├── composables/
+│   ├── Api.ts            # API integration for fetching questions
+│   └── useShuffleArray.ts # Utility for shuffling answer options
+├── App.vue               # Root component
+└── main.ts               # Entry point
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Start development server
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+# Build for production
 npm run build
 ```
+
+---
+
+## 🎮 How to Use
+
+1. **Start the Quiz** - Click "Start Quiz" to begin
+2. **Answer Questions** - Select an answer from the radio options
+3. **Visual Feedback** - Correct answers show green, wrong answers show red
+4. **Progress** - Watch the progress bar fill as you advance
+5. **View Results** - See your final score with a motivational message
+6. **Try Again** - Click "Try Again" to restart and retake the quiz
+
+---
+
+## 💡 Key Vue Concepts Demonstrated
+
+### Reactive State
+
+```typescript
+const step = ref(0); // Current question index
+const answers = ref([]); // User's answers
+const score = computed(() => {}); // Calculated score
+```
+
+### Custom Events
+
+```typescript
+// Child emits answer
+emits('answer', selectedAnswer);
+
+// Parent listens
+@answer="addAnswer"
+```
+
+### Component Keys
+
+```vue
+<!-- Force re-render when question changes -->
+<Question :key="step" :question="currentQuestion" />
+```
+
+### API Integration
+
+```typescript
+const { questions, loading, error } = useFetchQuestions();
+await fetchQuestions("https://opentdb.com/api.php?amount=10");
+```
+
+---
+
+## 🎨 UI Highlights
+
+- **Modern Dark Theme** - Easy on the eyes with pink/magenta accent colors
+- **Responsive Design** - Works seamlessly on desktop and mobile
+- **Progress Visualization** - Clear progress bar with percentage
+- **Dynamic Messaging** - Personalized feedback based on score:
+  - 🎉 100% → "Perfect Score!"
+  - 🌟 80%+ → "Excellent!"
+  - 👍 60%+ → "Good Job!"
+  - 💪 40%+ → "Not Bad!"
+  - 📚 <40% → "Keep Learning!"
+
+---
+
+## 🛠️ Technologies Used
+
+- **Vue 3** - Progressive JavaScript framework
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Lightning-fast build tool
+- **Open Trivia Database API** - Free quiz questions
+- **CSS3** - Modern styling with gradients and transitions
+- **Pico CSS** - Minimal CSS framework for semantic HTML styling
+
+---
+
+## 📚 Resources
+
+- [Vue 3 Documentation](https://vuejs.org/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [Vite Guide](https://vite.dev/)
+- [Open Trivia Database](https://opentdb.com/)
+
+---
+
+## 🔧 Recommended IDE Setup
+
+- **VS Code** + **[Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)** (disable Vetur)
+- **Vue DevTools** browser extension for debugging
+
+---
+
+## 📝 Notes
+
+This project is an educational tool created to master Vue 3 fundamentals. It showcases real-world patterns like component composition, state management, and API integration.
+
+**Perfect for learning:** Components, Reactivity, Events, Computed Properties, and Watchers!
+
+---
+
+## 📄 License
+
+Open source - feel free to use and modify for learning purposes.
