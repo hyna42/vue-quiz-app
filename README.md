@@ -2,6 +2,8 @@
 
 A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and **Vite**. This project demonstrates core Vue.js concepts through a fully functional quiz experience.
 
+🔗 **[Try it live →](https://vue-quiz-app-pearl.vercel.app/)** Test the quiz online right now!
+
 ![alt text](./src/assets/img1.png)
 
 ![alt text](./src/assets/img2.png)
@@ -17,7 +19,6 @@ A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and
 ## ✨ Features
 
 ### Quiz Functionality
-
 - 📝 **Dynamic Question Loading** - Fetches questions from Open Trivia Database API
 - 🎯 **Multiple Choice & True/False** - Supports both question types
 - 🎨 **Interactive Answers** - Radio buttons with visual feedback (correct/wrong answers highlighted)
@@ -25,7 +26,6 @@ A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and
 - 🏁 **Results Summary** - Detailed recap with score, percentage, and custom motivational messages
 
 ### Vue 3 Learning Features
-
 - ✅ **Composition API** - Using `<script setup>` syntax
 - 🔄 **Reactive State Management** - `ref()` and `computed()` for component state
 - 👀 **Watchers** - Auto-reset state when switching questions
@@ -40,15 +40,15 @@ A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and
 
 This project teaches essential Vue.js concepts:
 
-| Concept                 | Implementation                                           |
-| ----------------------- | -------------------------------------------------------- |
-| **State Management**    | Tracking quiz progress, answers, and results with `ref`  |
-| **Computed Properties** | Calculating score percentage dynamically                 |
-| **Watchers**            | Re-initializing component state when questions change    |
-| **Event Handling**      | Custom events (`@answer`, `@restart`)                    |
-| **API Integration**     | Fetching questions from external API with error handling |
-| **Type Safety**         | Full TypeScript support for type-safe components         |
-| **Component Structure** | Parent-child relationships and data flow                 |
+| Concept | Implementation |
+|---------|-----------------|
+| **State Management** | Tracking quiz progress, answers, and results with `ref` |
+| **Computed Properties** | Calculating score percentage dynamically |
+| **Watchers** | Re-initializing component state when questions change |
+| **Event Handling** | Custom events (`@answer`, `@restart`) |
+| **API Integration** | Fetching questions from external API with error handling |
+| **Type Safety** | Full TypeScript support for type-safe components |
+| **Component Structure** | Parent-child relationships and data flow |
 
 ---
 
@@ -72,12 +72,21 @@ src/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### 🎯 Live Demo
 
+**No installation needed!** 
+
+[👉 **Test the quiz online right now →**](https://vue-quiz-app-pearl.vercel.app/)
+
+---
+
+### Local Development
+
+#### Prerequisites
 - Node.js 18+
 - npm or yarn
 
-### Installation
+#### Installation
 
 ```bash
 # Install dependencies
@@ -106,15 +115,13 @@ npm run build
 ## 💡 Key Vue Concepts Demonstrated
 
 ### Reactive State
-
 ```typescript
-const step = ref(0); // Current question index
-const answers = ref([]); // User's answers
-const score = computed(() => {}); // Calculated score
+const step = ref(0);              // Current question index
+const answers = ref([]);          // User's answers
+const score = computed(() => {}) // Calculated score
 ```
 
 ### Custom Events
-
 ```typescript
 // Child emits answer
 emits('answer', selectedAnswer);
@@ -124,17 +131,15 @@ emits('answer', selectedAnswer);
 ```
 
 ### Component Keys
-
 ```vue
 <!-- Force re-render when question changes -->
 <Question :key="step" :question="currentQuestion" />
 ```
 
 ### API Integration
-
 ```typescript
 const { questions, loading, error } = useFetchQuestions();
-await fetchQuestions("https://opentdb.com/api.php?amount=10");
+await fetchQuestions('https://opentdb.com/api.php?amount=10');
 ```
 
 ---
@@ -164,7 +169,15 @@ await fetchQuestions("https://opentdb.com/api.php?amount=10");
 
 ---
 
-## 📚 Resources
+## 🌐 Deployment
+
+This project is deployed on **Vercel** with automatic CI/CD integration:
+- **Live URL**: [vue-quiz-app-pearl.vercel.app](https://vue-quiz-app-pearl.vercel.app/)
+- Every `git push` automatically redeploys the app
+- Zero downtime deployments
+- Instant preview URLs for pull requests
+
+
 
 - [Vue 3 Documentation](https://vuejs.org/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
