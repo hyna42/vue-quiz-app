@@ -49,7 +49,7 @@ const emits = defineEmits<{
       <p v-if="score">✅ Correct: {{ score }}</p>
       <p>❌ Wrong: {{ questions.length - score }}</p>
     </div>
-    <button class="retry-btn" @click="emits('restat')">Try Again</button>
+    <button class="retry-btn" @click="emits('restart')">Try Again</button>
   </div>
 </template>
 
