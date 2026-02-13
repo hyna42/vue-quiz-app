@@ -6,6 +6,7 @@ import { computed, ref, watch } from "vue";
 //prop
 const props = defineProps<{
   question: TriviaQuestion;
+  isLastQuestion: boolean;
 }>();
 //variables
 const shuffledAnswers = computed(() =>
@@ -22,13 +23,6 @@ const handleAnswer = () => {
   isCorrectAnswer.value =
     selectedAnswer.value === props.question.correct_answer;
 };
-//reinitialize refs when new question
-// watch(
-//   () => props.question,
-//   () => {
-//     ((selectedAnswer.value = null), (isCorrectAnswer.value = null));
-//   },
-// );
 //informe parent when responding, need change step
 const emits = defineEmits(["answer"]);
 </script>
@@ -63,7 +57,9 @@ const emits = defineEmits(["answer"]);
         />
         {{ answer }}
       </label>
-      <button :disabled="!hasAnswer" @click="emits('answer', selectedAnswer)">Next question</button>
+      <button :disabled="!hasAnswer" @click="emits('answer', selectedAnswer)">
+        {{ isLastQuestion ? "View Results" : "Next Question" }}
+      </button>
     </fieldset>
   </div>
 </template>
@@ -79,7 +75,9 @@ const emits = defineEmits(["answer"]);
   border: 1px solid #ee402e;
 }
 
-button{
-    margin-top: 1rem;;
+.question button {
+  margin-top: 1rem;
+  margin-left: auto;
+  display: block;
 }
 </style>
