@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 
 const props = defineProps<{
   shuffledAnswers: string[];
@@ -31,7 +30,6 @@ const model = defineModel<string | null>();
     />
     {{ answer }}
   </label>
-  <!-- <pre>correct == {{ correctAnswer }}</pre> -->
 </template>
 
 <style scoped>

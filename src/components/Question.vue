@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TriviaQuestion } from "@/composables/Api";
 import { useShuffleArray } from "@/composables/useShuffleArray";
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import Answer from "./Answer.vue";
 
 //prop
@@ -16,18 +16,32 @@ const shuffledAnswers = computed(() =>
     ...props.question.incorrect_answers,
   ]),
 );
-const hasAnswer = computed(() => selectedAnswer.value !== null);
+// const hasAnswer = computed(() => selectedAnswer.value !== null);
 const selectedAnswer = ref(null);
-const correctAnswer = computed(()=>props.question.correct_answer)
+const correctAnswer = computed(() => props.question.correct_answer);
 
 const isCorrectAnswer = computed(() => {
   if (selectedAnswer.value === null) return null;
   return selectedAnswer.value === correctAnswer;
 });
 
-
 //informe parent when responding, need change step
-const emits = defineEmits(["answer"]);
+const emits = defineEmits<{
+  answer: [answer: string | null];
+}>();
+
+//timer button
+let timer: ReturnType<typeof setTimeout>;
+
+onMounted(() => {
+  timer = setTimeout(() => {
+    emits("answer", selectedAnswer.value);
+  }, 12_000);
+});
+
+onUnmounted(() => {
+  clearTimeout(timer);
+});
 </script>
 
 <template>
@@ -36,17 +50,16 @@ const emits = defineEmits(["answer"]);
       <legend>
         <h4>{{ question.question }}</h4>
       </legend>
-      <!-- TODO refacto => Answer component -->
-       <Answer 
-        :shuffled-answers="shuffledAnswers" :disabled="isCorrectAnswer !== null"
+      <Answer
+        :shuffled-answers="shuffledAnswers"
+        :disabled="isCorrectAnswer !== null"
         v-model="selectedAnswer"
         :correctAnswer="correctAnswer"
-   
       />
       <!-- TODO : buton automatique -->
-      <button :disabled="!hasAnswer" @click="emits('answer', selectedAnswer)">
+      <!-- <button :disabled="!hasAnswer" @click="emits('answer', selectedAnswer)">
         {{ isLastQuestion ? "View Results" : "Next Question" }}
-      </button>
+      </button> -->
     </fieldset>
   </div>
 </template>

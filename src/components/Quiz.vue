@@ -21,7 +21,7 @@ const answers = ref<(string | null)[]>(props.questions.map(() => null));
 const currentQuestion = computed(() => props.questions[step.value] || null);
 
 //fonctions
-const addAnswer = (answer: string) => {
+const addAnswer = (answer: string|null) => {
   //incremente answers
   answers.value[step.value] = answer;
   //si on est en dernier : afficher un texte
@@ -71,6 +71,7 @@ const restartQuiz = () => {
       />
     </div>
   </div>
+  <!-- <pre>{{ answers }}</pre> -->
 </template>
 
 <style scoped>
