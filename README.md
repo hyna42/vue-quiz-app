@@ -23,6 +23,7 @@ A modern, interactive quiz application built with **Vue 3**, **TypeScript**, and
 - 🎯 **Multiple Choice & True/False** - Supports both question types
 - 🎨 **Interactive Answers** - Radio buttons with visual feedback (correct/wrong answers highlighted)
 - 📊 **Progress Tracking** - Real-time progress bar showing completion percentage
+- ⏱️ **Auto-Advance Timer** - Questions automatically advance after 6 seconds (~2 minutes for 10 questions)
 - 🏁 **Results Summary** - Detailed recap with score, percentage, and custom motivational messages
 
 ### Vue 3 Learning Features
@@ -53,12 +54,12 @@ This project teaches essential Vue.js concepts:
 ---
 
 ## 📁 Project Structure
-
 ```
 src/
 ├── components/
 │   ├── Quiz.vue          # Main quiz container, state management
 │   ├── Question.vue      # Single question with answer options
+│   ├── Answer.vue        # Answer options with visual feedback
 │   ├── Progress.vue      # Progress bar component
 │   └── Recap.vue         # Results screen with score display
 ├── composables/
@@ -87,7 +88,6 @@ src/
 - npm or yarn
 
 #### Installation
-
 ```bash
 # Install dependencies
 npm install
@@ -106,9 +106,12 @@ npm run build
 1. **Start the Quiz** - Click "Start Quiz" to begin
 2. **Answer Questions** - Select an answer from the radio options
 3. **Visual Feedback** - Correct answers show green, wrong answers show red
-4. **Progress** - Watch the progress bar fill as you advance
-5. **View Results** - See your final score with a motivational message
-6. **Try Again** - Click "Try Again" to restart and retake the quiz
+4. **Auto-Advance** - Questions automatically advance after 6 seconds
+5. **Progress** - Watch the progress bar fill as you advance
+6. **View Results** - See your final score with a motivational message
+7. **Try Again** - Click "Try Again" to restart and retake the quiz
+
+**⏱️ Quiz Duration:** ~2 minutes for 10 questions (6 seconds per question auto-advance)
 
 ---
 
@@ -121,19 +124,30 @@ const answers = ref([]);          // User's answers
 const score = computed(() => {}) // Calculated score
 ```
 
-### Custom Events
+### Custom Events with Typing
 ```typescript
-// Child emits answer
-emits('answer', selectedAnswer);
+// Child emits answer with type safety
+const emits = defineEmits<{
+  answer: [answer: string | null]
+}>();
 
 // Parent listens
 @answer="addAnswer"
 ```
 
-### Component Keys
+### Component Keys for Re-rendering
 ```vue
 <!-- Force re-render when question changes -->
 <Question :key="step" :question="currentQuestion" />
+```
+
+### v-model in Child Components
+```typescript
+// Child component
+const model = defineModel<string | null>();
+
+// Parent usage
+<Answer v-model="selectedAnswer" />
 ```
 
 ### API Integration
@@ -149,6 +163,7 @@ await fetchQuestions('https://opentdb.com/api.php?amount=10');
 - **Modern Dark Theme** - Easy on the eyes with pink/magenta accent colors
 - **Responsive Design** - Works seamlessly on desktop and mobile
 - **Progress Visualization** - Clear progress bar with percentage
+- **Visual Feedback** - Green for correct answers, red for incorrect
 - **Dynamic Messaging** - Personalized feedback based on score:
   - 🎉 100% → "Perfect Score!"
   - 🌟 80%+ → "Excellent!"
@@ -177,7 +192,9 @@ This project is deployed on **Vercel** with automatic CI/CD integration:
 - Zero downtime deployments
 - Instant preview URLs for pull requests
 
+---
 
+## 📚 Resources
 
 - [Vue 3 Documentation](https://vuejs.org/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
@@ -195,9 +212,9 @@ This project is deployed on **Vercel** with automatic CI/CD integration:
 
 ## 📝 Notes
 
-This project is an educational tool created to master Vue 3 fundamentals. It showcases real-world patterns like component composition, state management, and API integration.
+This project is an educational tool created to master Vue 3 fundamentals. It showcases real-world patterns like component composition, state management, API integration, and proper TypeScript typing.
 
-**Perfect for learning:** Components, Reactivity, Events, Computed Properties, and Watchers!
+**Perfect for learning:** Components, Reactivity, Events, Computed Properties, Watchers, and Props Drilling!
 
 ---
 
