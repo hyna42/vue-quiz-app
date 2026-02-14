@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { computed } from "vue";
 
 const props = defineProps<{
-    shuffledAnswers: string[];
-    disabled:boolean
+  shuffledAnswers: string[];
+  disabled: boolean;
+  correctAnswer: string;
 }>();
 
-const model = defineModel<(string|null)>();
+const model = defineModel<string | null>();
+
 </script>
 
 <template>
@@ -13,6 +16,10 @@ const model = defineModel<(string|null)>();
     v-for="(answer, index) in shuffledAnswers"
     :key="index"
     :for="`answer${index}`"
+    :class="{
+      right: props.disabled && answer === props.correctAnswer,
+      wrong: props.disabled && answer !== props.correctAnswer && model=== answer,
+    }"
   >
     <input
       :id="`answer${index}`"
@@ -24,4 +31,16 @@ const model = defineModel<(string|null)>();
     />
     {{ answer }}
   </label>
+  <!-- <pre>correct == {{ correctAnswer }}</pre> -->
 </template>
+
+<style scoped>
+.right {
+  color: #47a417;
+  font-weight: bold;
+}
+.wrong {
+    color: #ee402e;
+    font-weight: bold;
+}
+</style>

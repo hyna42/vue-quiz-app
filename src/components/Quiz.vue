@@ -43,7 +43,7 @@ const restartQuiz = () => {
   console.log("🚀 Let's go!");
 };
 
-console.log(":TEST:",props.questions.map(q=>q.correct_answer))
+// console.log(":TEST:",props.questions.map(q=>q.correct_answer))
 </script>
 
 <template>
